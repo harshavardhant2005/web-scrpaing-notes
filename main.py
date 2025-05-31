@@ -5,12 +5,13 @@ from selenium.webdriver.chrome.service import Service
 from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.common.by import By
-import pandas as pd  # ← added import
+import pandas as pd 
 import time
+
 chrome_options = Options()
 chrome_options.add_experimental_option("detach",True)
 driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()),options=chrome_options)
-driver.get("https://housing.com/in/buy/chennai/house-chennai?page=7")
+driver.get("https://housing.com/in/buy/searches/M2P1h654t5gzdrea0ll_6w68ew6j3mdrkz8m_6ne1si6hotnhbq8_3nlxhdfttdcshmss_jecnctiyiinz5rs")
 
 def get_text(xpath):
     try:
@@ -33,19 +34,20 @@ def get_by_label_th(label):
 
 data = []
 # for each page data record
-for card in range(1,31):
+for card in range(1,147):
     main_tab = driver.current_window_handle
     try:
         property_link = driver.find_element("xpath",f"/html/body/div[1]/div[1]/div[3]/div[2]/div[1]/div[4]/div[{card}]/div/article/div[1]/div[2]/div[1]/div[1]/div[1]/a")
     except:
         continue
-    time.sleep(3)
+    time.sleep(2)
     property_link.click()
     all_tabs = driver.window_handles
     new_tab = [tab for tab in all_tabs if tab!=main_tab][0]
     driver.switch_to.window(new_tab) 
     property_data = {}
     safe_print("Title", "/html/body/div[1]/div[1]/div[3]/div[1]/div[1]/div/div[2]/div/div[1]/div[1]/div[1]/h1/div[1]/div")
+    safe_print("area name","/html/body/div[1]/div[1]/div[3]/div[1]/div[1]/div/div[2]/div/div[1]/div[1]/div[1]/h1/div[2]")
     safe_print("Price", "/html/body/div[1]/div[1]/div[3]/div[1]/div[1]/div/div[2]/div/div[2]/div[1]/span")
     safe_print("Area", "/html/body/div[1]/div[1]/div[3]/div[1]/div[1]/div/section/div[1]/div[1]/div/div")
     safe_print("Avg Price", "/html/body/div[1]/div[1]/div[3]/div[1]/div[1]/div/section/div[2]/div[1]")
@@ -63,4 +65,4 @@ for card in range(1,31):
     driver.close()
     driver.switch_to.window(main_tab)
 driver.quit()
-pd.DataFrame(data).to_csv("property_data.csv",mode="a", index=False,header=False)  # ← save to CSV
+pd.DataFrame(data).to_csv("property_data.csv",mode="a", index=True)  # ← save to CSV
