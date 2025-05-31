@@ -10,7 +10,7 @@ import time
 chrome_options = Options()
 chrome_options.add_experimental_option("detach",True)
 driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()),options=chrome_options)
-driver.get("https://housing.com/in/buy/chennai/house-chennai?page=5")
+driver.get("https://housing.com/in/buy/chennai/house-chennai?page=7")
 
 def get_text(xpath):
     try:
@@ -63,4 +63,4 @@ for card in range(1,31):
     driver.close()
     driver.switch_to.window(main_tab)
 driver.quit()
-pd.DataFrame(data).to_csv("property_data_2.csv", index=False)  # ← save to CSV
+pd.DataFrame(data).to_csv("property_data.csv",mode="a", index=False,header=False)  # ← save to CSV
