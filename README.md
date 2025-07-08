@@ -6,23 +6,6 @@ Unlike using pre-made datasets from platforms like Kaggle, this project involves
 
 ---
 
-Project Structure:
-
-web-scrpaing-notes/
-├── chromedriver/                 -> ChromeDriver executable (required for Selenium)
-├── data/                         -> Folder to store raw and cleaned data files
-├── env/                          -> Python virtual environment (optional)
-├── cleaned\_property\_data.csv     -> Cleaned dataset ready for analysis
-├── house\_price\_data.csv          -> Raw scraped data
-├── documentation of webscraping.ipynb  -> Notes and explanation of scraping process
-├── final\_scraper.ipynb           -> Final working notebook to scrape data
-├── main.py                       -> Python script to initiate scraping process
-├── search\_checker.py             -> Utility to validate search results or URLs
-├── .gitignore                    -> Git ignore file
-└── README.md                     -> Project documentation (this file)
-
----
-
 Tech Stack:
 
 * Language: Python 3.x
@@ -60,7 +43,7 @@ Dataset Overview:
 * Raw Data: Saved in house\_price\_data.csv
 * Cleaned Data: Saved in cleaned\_property\_data.csv
 * Columns may include: Title, Price, Location, Area, BHK, Amenities, etc.
-
+      
 ---
 
 ML Use Case Ideas:
